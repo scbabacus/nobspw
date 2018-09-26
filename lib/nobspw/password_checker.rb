@@ -1,3 +1,5 @@
+require 'shellwords'
+
 module NOBSPW
   class PasswordChecker
     include NOBSPW::ValidationMethods
@@ -38,7 +40,7 @@ module NOBSPW
     end
 
     def grep_command(path)
-      "#{NOBSPW.configuration.grep_path} '^#{@password}$' #{path}"
+      "#{NOBSPW.configuration.grep_path} #{Shellwords.escape(@password)} #{path}"
     end
   end
 end

@@ -34,4 +34,6 @@ Gem::Specification.new do |spec|
     spec.add_development_dependency 'ruby_gntp', "~> 0.3.4"
     spec.add_development_dependency 'terminal-notifier-guard', '~> 1.6.1'
   end
+
+  spec.add_dependency "posix-spawn"
 end

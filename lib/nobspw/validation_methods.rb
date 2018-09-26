@@ -1,3 +1,6 @@
+require 'shellwords'
+require 'posix/spawn'
+
 module NOBSPW
   module ValidationMethods
     DEFAULT_VALIDATION_METHODS = %i(password_empty?
@@ -65,9 +68,12 @@ module NOBSPW
     end
 
     def password_too_common?
-      `#{grep_command(NOBSPW.configuration.dictionary_path)}`
-
-      case $?.exitstatus
+      grep_response = POSIX::Spawn::Child.new(
+        *Shellwords.split(
+          grep_command(NOBSPW.configuration.dictionary_path)
+        )
+      )
+      case grep_response.status
       when 0
         true
       when 1
