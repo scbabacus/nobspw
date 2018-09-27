@@ -40,7 +40,7 @@ module NOBSPW
     end
 
     def grep_command(path)
-      "#{NOBSPW.configuration.grep_path} #{Shellwords.escape(@password)} #{path}"
+      "#{NOBSPW.configuration.grep_path} -m 1 #{Shellwords.escape(@password)} #{path}"
     end
   end
 end
